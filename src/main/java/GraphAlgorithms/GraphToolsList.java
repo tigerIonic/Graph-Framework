@@ -49,6 +49,11 @@ public class GraphToolsList  extends GraphTools {
 
 	}
 
+	public static void parcoursEnLargeur(UndirectedGraph g){
+
+	}
+
+
 
 
 	public static void main(String[] args) {
