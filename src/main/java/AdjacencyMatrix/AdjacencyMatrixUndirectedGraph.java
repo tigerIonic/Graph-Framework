@@ -63,30 +63,33 @@ public class AdjacencyMatrixUndirectedGraph extends AbstractMatrixGraph<Undirect
 	
 	// ------------------------------------------------
 	// 					Methods 
-	// ------------------------------------------------		
-	
+	// ------------------------------------------------
+
 	@Override
 	public boolean isEdge(AbstractNode x, AbstractNode y) {
 		// A completer
-		return true;		
+		return this.matrix[x.getLabel()][y.getLabel()] == 1;
 	}
-	
+
 	/**
-     * removes the edge (x,y) if there exists at least one between these nodes in the graph.
-     */
+	 * removes the edge (x,y) if there exists at least one between these nodes in the graph.
+	 */
 	@Override
 	public void removeEdge(AbstractNode x, AbstractNode y) {
 		// A completer
+		this.matrix[x.getLabel()][y.getLabel()] = 0;
+		this.matrix[y.getLabel()][x.getLabel()] = 0;
 	}
 
 	/**
-     * adds the edge (x,y), we allow the multi-graph.
-     */
+	 * adds the edge (x,y), we allow the multi-graph.
+	 */
 	@Override
 	public void addEdge(AbstractNode x, AbstractNode y) {
 		// A completer
+		this.matrix[x.getLabel()][y.getLabel()] = 1;
+		this.matrix[y.getLabel()][x.getLabel()] = 1;
 	}
-
 	
 	/**
      * @return the adjacency matrix representation int[][] of the graph
@@ -119,5 +122,11 @@ public class AdjacencyMatrixUndirectedGraph extends AbstractMatrixGraph<Undirect
 			System.out.print(integer + ", ");
 		}
 		// A completer
+		am.isEdge(new UndirectedNode(2), new UndirectedNode(5));
+		for (int i = 0; i<3; i++)
+			am.addEdge(new UndirectedNode(2), new UndirectedNode(5));
+		System.out.println(am);
+		am.removeEdge(new UndirectedNode(2), new UndirectedNode(5));
+		System.out.println(am);
 	}
 }

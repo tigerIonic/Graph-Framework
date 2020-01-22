@@ -9,6 +9,7 @@ import java.util.concurrent.BlockingQueue;
 
 import AdjacencyList.DirectedGraph;
 import AdjacencyList.DirectedValuedGraph;
+import AdjacencyList.UndirectedGraph;
 import AdjacencyList.UndirectedValuedGraph;
 import Collection.Triple;
 import Nodes.DirectedNode;
@@ -43,6 +44,11 @@ public class GraphToolsList  extends GraphTools {
 	// ------------------------------------------
 
 	// A completer
+
+	public static void parcoursEnProfondeur(UndirectedGraph g){
+
+	}
+
 
 
 	public static void main(String[] args) {
