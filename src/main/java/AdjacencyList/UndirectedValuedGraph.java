@@ -39,7 +39,11 @@ public class UndirectedValuedGraph extends UndirectedGraph<UndirectedNode> {
      * Adds the edge (from,to) with cost if it is not already present in the graph
      */
     public void addEdge(UndirectedNode x, UndirectedNode y, int cost) {
-    	// A completer
+        if(!isEdge(x,y)){
+            // A completer
+            this.getNodeOfList(x).getNeighbours().put(this.getNodeOfList(y), cost);
+            this.getNodeOfList(y).getNeighbours().put(this.getNodeOfList(x), cost);
+        }
     }
     
     @Override
