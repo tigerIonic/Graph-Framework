@@ -55,6 +55,10 @@ public class AdjacencyMatrixUndirectedValuedGraph extends AdjacencyMatrixUndirec
      */
 	@Override
 	public void removeEdge(AbstractNode x, AbstractNode y) {
+
+		//this.matrix[x.getLabel()][y.getLabel()] = 0;
+		//this.matrix[y.getLabel()][x.getLabel()] = 0;
+
 		super.removeEdge(x, y);
 		// A completer
 	}
@@ -63,7 +67,16 @@ public class AdjacencyMatrixUndirectedValuedGraph extends AdjacencyMatrixUndirec
      * adds the edge (x,y,cost), we allow the multi-graph. If there is already one initial cost, we keep it.
      */
 	public void addEdge(AbstractNode x, AbstractNode y, int cost ) {
-		super.addEdge(x,y);
+		if (isEdge(x,y)){
+			Integer c = x.getWeight();
+			this.matrix[x.getLabel()][y.getLabel()] = c;
+			this.matrix[y.getLabel()][x.getLabel()] = c;
+		}else {
+			this.matrix[x.getLabel()][y.getLabel()] = cost;
+			this.matrix[y.getLabel()][x.getLabel()] = cost;
+		}
+
+		//super.addEdge(x,y);
 		// A completer
 	}
 	
