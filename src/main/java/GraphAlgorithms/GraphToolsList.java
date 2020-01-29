@@ -1,17 +1,16 @@
 package GraphAlgorithms;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
+import Abstraction.AbstractListGraph;
 import AdjacencyList.DirectedGraph;
 import AdjacencyList.DirectedValuedGraph;
 import AdjacencyList.UndirectedGraph;
 import AdjacencyList.UndirectedValuedGraph;
 import Collection.Triple;
+import Nodes.AbstractNode;
 import Nodes.DirectedNode;
 import Nodes.UndirectedNode;
 
@@ -49,7 +48,19 @@ public class GraphToolsList  extends GraphTools {
 
 	}
 
-	public static void parcoursEnLargeur(UndirectedGraph g){
+	public static void parcoursEnLargeur(AbstractListGraph<AbstractNode> g){
+		boolean[] mark = new boolean[g.getNbNodes()];
+		for(int i = 0; i<g.getNbNodes(); i++){
+			mark[i] = false;
+		}
+		int index = 0;
+		Queue<AbstractNode> q= new PriorityQueue<AbstractNode>();
+		AbstractNode v = g.getNodes().get(0);
+		q.add(v);
+		while (!q.isEmpty()){
+			AbstractNode n = q.poll();
+
+		}
 
 	}
 
@@ -63,5 +74,8 @@ public class GraphToolsList  extends GraphTools {
 		System.out.println(al);
 
 		// A completer
+
+		//GraphToolsList.parcoursEnLargeur(al);
+
 	}
 }
