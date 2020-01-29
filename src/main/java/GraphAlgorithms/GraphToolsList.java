@@ -73,7 +73,7 @@ public class GraphToolsList  extends GraphTools {
 			}
 		}
 	}
-	void explorerGraphe(UndirectedGraph g) {
+	void explorerGraphe(UndirectedGraph<UndirectedNode> g) {
 		Set<AbstractNode> atteint = new HashSet<AbstractNode>();
 		for (UndirectedNode s : g.getNodes()) {
 			if (!atteint.contains(s)) {
