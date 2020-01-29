@@ -1,10 +1,12 @@
 package AdjacencyList;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import Abstraction.AbstractListGraph;
 import GraphAlgorithms.GraphTools;
+import Nodes.AbstractNode;
 import Nodes.DirectedNode;
 import Abstraction.IDirectedGraph;
 
@@ -69,18 +71,24 @@ public class DirectedGraph<A extends DirectedNode> extends AbstractListGraph<A> 
 
     @Override
     public boolean isArc(A from, A to) {
-    	// A completer
-    	return false;
+
+        return this.getNodeOfList(from).getSuccs().containsKey(this.getNodeOfList(to));
     }
 
     @Override
     public void removeArc(A from, A to) {
-    	// A completer
+        if(isArc(from,to)){
+
+            this.getNodeOfList(from).getSuccs().remove(this.getNodeOfList(to));
+        }
     }
 
     @Override
     public void addArc(A from, A to) {
-    	// A completer
+        if(!isArc(from,to)){
+            // A completer
+            this.getNodeOfList(from).getSuccs().put(this.getNodeOfList(to), 0);
+        }
     }
 
     //--------------------------------------------------
@@ -122,7 +130,16 @@ public class DirectedGraph<A extends DirectedNode> extends AbstractListGraph<A> 
     @Override
     public IDirectedGraph computeInverse() {
         DirectedGraph<A> g = new DirectedGraph<>(this);
-        // A completer
+        for (A node : g.getNodes()){
+           Map<DirectedNode, Integer> from = node.getPreds();
+           Map<DirectedNode, Integer> to = node.getSuccs();
+           Map<DirectedNode, Integer> empty = new LinkedHashMap<>();
+           node.setPreds(empty);
+           node.setPreds(to);
+           node.setSuccs(empty);
+           node.setSuccs(from);
+
+             };
         return g;
     }
     
@@ -145,6 +162,7 @@ public class DirectedGraph<A extends DirectedNode> extends AbstractListGraph<A> 
         GraphTools.afficherMatrix(Matrix);
         DirectedGraph al = new DirectedGraph(Matrix);
         System.out.println(al);
+        System.out.println(al.computeInverse());
         // A completer
     }
 }
