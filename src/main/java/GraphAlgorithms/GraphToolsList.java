@@ -12,6 +12,7 @@ import AdjacencyList.DirectedValuedGraph;
 import AdjacencyList.UndirectedGraph;
 import AdjacencyList.UndirectedValuedGraph;
 import Collection.Triple;
+import Nodes.AbstractNode;
 import Nodes.DirectedNode;
 import Nodes.UndirectedNode;
 
@@ -53,7 +54,23 @@ public class GraphToolsList  extends GraphTools {
 
 	}
 
+	void explorerSommet(AbstractNode s, Set<AbstractNode> a) {
+		a.add(s);
 
+		for (AbstractNode t : s.) {
+			if (!a.contains(t)) {
+				explorerSommet(t,a);
+			}
+		}
+	}
+	void explorerGraphe(UndirectedGraph g) {
+		Set<AbstractNode> atteint = new HashSet<AbstractNode>();
+		for (UndirectedNode s : g.getNodes()) {
+			if (!atteint.contains(s)) {
+				explorerSommet(s, atteint);
+			}
+		}
+	}
 
 
 	public static void main(String[] args) {
