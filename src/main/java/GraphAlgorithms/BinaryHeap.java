@@ -128,6 +128,7 @@ public class BinaryHeap {
     }
 
     private boolean testRec(int root) {
+        boolean x;
         if (isLeaf(root)) {
             return true;
         } else {
@@ -136,7 +137,9 @@ public class BinaryHeap {
             if (right >= pos) {
                 return nodes[left] >= nodes[root] && testRec(left);
             } else {
-                return nodes[left] >= nodes[root] && testRec(left) && nodes[right] >= nodes[root] && testRec(right);
+                x= nodes[left] >= nodes[root] && testRec(left) && nodes[right] >= nodes[root] && testRec(right);
+                System.out.println(x);
+                return x;
             }
         }
     }
