@@ -29,6 +29,27 @@ public class BinaryHeap {
 
     public void insert(int element) {
     	// A completer
+        System.out.println("Adding : " +  element + " in ");
+        System.out.println("[");
+        for(int e : this.nodes){
+            System.out.println(e + " , ");
+        }
+        System.out.println("]");
+        int tmp = pos;
+        this.nodes[pos] = element;
+        this.pos++;
+        boolean stop = false;
+        while(!stop && ((tmp - 1 )/ 2) > 0){
+            System.out.println(this.nodes[tmp] + " < " + this.nodes[((tmp - 1 )/ 2)] + " ? " );
+            if (this.nodes[tmp] < this.nodes[((tmp - 1 )/ 2)]){
+                this.nodes[tmp] = this.nodes[((tmp - 1 )/ 2)];
+                this.nodes[((tmp - 1 )/ 2)] = element;
+                tmp = ((tmp - 1 )/ 2);
+            } else {
+                stop = true;
+            }
+        }
+
     }
 
     public int remove() {
