@@ -32,8 +32,31 @@ public class BinaryHeap {
     }
 
     public int remove() {
-    	// A completer
-    	return 0;
+        pos =0;
+    	int x = this.nodes[pos];
+        this.nodes[pos] = this.nodes[this.nodes.length-1];
+
+        int self = this.nodes[pos];
+    	int son1= this.nodes[2*pos+1];
+    	int son2= this.nodes[2*pos+1];
+    	int parent= this.nodes[(pos-1)/2];
+    	int y;
+
+        while (( self < son1) || ( self < son2)){
+
+            if (self < son1) {
+                y=self;
+                self=son1;
+                son1=y;
+            }
+
+            if (self < son2) {
+                y=self;
+                self=son2;
+                son1=y;
+            }
+        }
+    	return x;
     }
 
     private int getBestChildPos(int src) {
@@ -108,7 +131,7 @@ public class BinaryHeap {
             jarjarBin.insert(rand);            
             k--;
         }
-     // A completer
+        //jarjarBin.remove();
         System.out.println("\n" + jarjarBin);
         System.out.println(jarjarBin.test());
     }

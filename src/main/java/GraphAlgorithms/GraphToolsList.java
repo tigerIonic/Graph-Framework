@@ -44,8 +44,19 @@ public class GraphToolsList  extends GraphTools {
 
 	// A completer
 
-	public static void parcoursEnProfondeur(UndirectedGraph g){
+	public static void parcoursEnProfondeur(AbstractListGraph<AbstractNode> g){
+		boolean[] mark = new boolean[g.getNbNodes()];
+		for(int i = 0; i<g.getNbNodes(); i++){
+			mark[i] = false;
+		}
+		int index = 0;
+		Stack<AbstractNode> q= new Stack<AbstractNode>();
+		AbstractNode v = g.getNodes().get(0);
+		q.add(v);
+		//while (!q.isEmpty()){
+			//AbstractNode n = q.poll();
 
+		//}
 	}
 
 	public static void parcoursEnLargeur(AbstractListGraph<AbstractNode> g){
@@ -66,12 +77,14 @@ public class GraphToolsList  extends GraphTools {
 
 	void explorerSommet(AbstractNode s, Set<AbstractNode> a) {
 		a.add(s);
-
+/*
 		for (AbstractNode t : s.) {
 			if (!a.contains(t)) {
 				explorerSommet(t,a);
 			}
 		}
+		*/
+
 	}
 	void explorerGraphe(UndirectedGraph<UndirectedNode> g) {
 		Set<AbstractNode> atteint = new HashSet<AbstractNode>();
