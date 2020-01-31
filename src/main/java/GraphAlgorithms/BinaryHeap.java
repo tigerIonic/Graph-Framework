@@ -28,20 +28,13 @@ public class BinaryHeap {
     }
 
     public void insert(int element) {
-    	/*// A completer
-        ;*/
+
         int tmp = pos;
         this.nodes[pos] = element;
         this.pos++;
         boolean stop = false;
         while(!stop && ((tmp - 1 )/ 2) >= 0){
-            System.out.println("Adding : " +  element + " in ");
-            System.out.print("[");
-            for(int k=0; k<this.pos;k++){
-                System.out.print(this.nodes[k] + " , ");
-            }
-            System.out.println("]");
-           // System.out.println(this.nodes[tmp] + " < " + this.nodes[((tmp - 1 )/ 2)] + " ? " );
+
             if (this.nodes[tmp] < this.nodes[((tmp - 1 )/ 2)]){
                 this.nodes[tmp] = this.nodes[((tmp - 1 )/ 2)];
                 this.nodes[((tmp - 1 )/ 2)] = element;
@@ -57,30 +50,33 @@ public class BinaryHeap {
         int position =0;
     	int x = this.nodes[position];
         this.nodes[position] = this.nodes[this.pos-1];
-
-        int self = this.nodes[position];
-    	int son1= this.nodes[2*position+1];
-    	int son2= this.nodes[2*position+1];
+        this.nodes[this.pos-1] = Integer.MAX_VALUE;
+        pos--;
     	int y;
 
-        while (( self < son1) || ( self < son2)){
+        while ((this.nodes[position] > this.nodes[2*position+1]) || ( this.nodes[position] > this.nodes[2*position+2])){
 
-            self = this.nodes[position];
-            son1= this.nodes[2*position+1];
-            son2= this.nodes[2*position+1];
+            System.out.println("t0 " + position);
 
-            if (self < son1) {
-                y=self;
-                self=son1;
-                son1=y;
-                position=position+1;
+            if (this.nodes[position] > this.nodes[2*position+1]) {
+                y=this.nodes[position];
+                this.nodes[position]=this.nodes[2*position+1];
+                this.nodes[2*position+1]=y;
+                position=(2*position+1);
+                System.out.println("t1 " + position);
+
             }
 
-            if (self < son2) {
-                y=self;
-                self=son2;
-                son1=y;
-                position=position+2;
+            else if (this.nodes[position] > this.nodes[2*position+2]) {
+                y=this.nodes[position];
+                this.nodes[position]=this.nodes[2*position+2];
+                this.nodes[2*position+2]=y;
+                position=(2*position+2);
+                System.out.println("t2 " + position);
+            }
+
+            if ((2*position+2)>=32){
+                return x;
             }
         }
     	return x;
@@ -154,11 +150,17 @@ public class BinaryHeap {
         int max = 20;
         while (k > 0) {
             int rand = min + (int) (Math.random() * ((max - min) + 1));
-            System.out.print("insert " + rand);
-            jarjarBin.insert(rand);            
+            System.out.print("insert " + rand + " ");
+            jarjarBin.insert(rand);
             k--;
         }
-       // System.out.println("remove"+ jarjarBin.remove());
+
+
+        System.out.println("\n" + jarjarBin);
+        System.out.println(jarjarBin.test());
+
+        System.out.println();
+        System.out.println("remove"+ jarjarBin.remove());
         System.out.println("\n" + jarjarBin);
         System.out.println(jarjarBin.test());
     }
