@@ -30,9 +30,9 @@ public class BinaryHeap {
     public void insert(int element) {
     	// A completer
         System.out.println("Adding : " +  element + " in ");
-        System.out.println("[");
+        System.out.print("[");
         for(int e : this.nodes){
-            System.out.println(e + " , ");
+            System.out.print(e + " , ");
         }
         System.out.println("]");
         int tmp = pos;
@@ -55,7 +55,7 @@ public class BinaryHeap {
     public int remove() {
         int position =0;
     	int x = this.nodes[position];
-        this.nodes[position] = this.nodes[this.pos];
+        this.nodes[position] = this.nodes[this.pos-1];
 
         int self = this.nodes[position];
     	int son1= this.nodes[2*position+1];
@@ -157,7 +157,7 @@ public class BinaryHeap {
             jarjarBin.insert(rand);            
             k--;
         }
-        //jarjarBin.remove();
+        System.out.println("remove"+ jarjarBin.remove());
         System.out.println("\n" + jarjarBin);
         System.out.println(jarjarBin.test());
     }
