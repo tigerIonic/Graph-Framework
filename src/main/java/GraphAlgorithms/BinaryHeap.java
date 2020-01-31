@@ -28,19 +28,20 @@ public class BinaryHeap {
     }
 
     public void insert(int element) {
-    	// A completer
-        System.out.println("Adding : " +  element + " in ");
-        System.out.print("[");
-        for(int e : this.nodes){
-            System.out.print(e + " , ");
-        }
-        System.out.println("]");
+    	/*// A completer
+        ;*/
         int tmp = pos;
         this.nodes[pos] = element;
         this.pos++;
         boolean stop = false;
-        while(!stop && ((tmp - 1 )/ 2) > 0){
-            System.out.println(this.nodes[tmp] + " < " + this.nodes[((tmp - 1 )/ 2)] + " ? " );
+        while(!stop && ((tmp - 1 )/ 2) >= 0){
+            System.out.println("Adding : " +  element + " in ");
+            System.out.print("[");
+            for(int k=0; k<this.pos;k++){
+                System.out.print(this.nodes[k] + " , ");
+            }
+            System.out.println("]");
+           // System.out.println(this.nodes[tmp] + " < " + this.nodes[((tmp - 1 )/ 2)] + " ? " );
             if (this.nodes[tmp] < this.nodes[((tmp - 1 )/ 2)]){
                 this.nodes[tmp] = this.nodes[((tmp - 1 )/ 2)];
                 this.nodes[((tmp - 1 )/ 2)] = element;
@@ -157,7 +158,7 @@ public class BinaryHeap {
             jarjarBin.insert(rand);            
             k--;
         }
-        System.out.println("remove"+ jarjarBin.remove());
+       // System.out.println("remove"+ jarjarBin.remove());
         System.out.println("\n" + jarjarBin);
         System.out.println(jarjarBin.test());
     }
