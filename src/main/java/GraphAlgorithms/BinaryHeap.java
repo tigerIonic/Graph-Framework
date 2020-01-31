@@ -39,13 +39,14 @@ public class BinaryHeap {
         this.nodes[pos] = element;
         this.pos++;
         boolean stop = false;
-        while(!stop && ((tmp - 1 )/ 2) > 0){
+        while(!stop && ((tmp - 1 )/ 2) >= 0){
             System.out.println(this.nodes[tmp] + " < " + this.nodes[((tmp - 1 )/ 2)] + " ? " );
             if (this.nodes[tmp] < this.nodes[((tmp - 1 )/ 2)]){
                 this.nodes[tmp] = this.nodes[((tmp - 1 )/ 2)];
                 this.nodes[((tmp - 1 )/ 2)] = element;
                 tmp = ((tmp - 1 )/ 2);
             } else {
+                System.out.println(tmp + " too tiny");
                 stop = true;
             }
         }
@@ -103,7 +104,7 @@ public class BinaryHeap {
 	 */	
     private boolean isLeaf(int src) {
     	// A completer
-    	return false;
+    	return ((2 * src) + 1) >= this.pos;
     }
 
     private void swap(int father, int child) {
