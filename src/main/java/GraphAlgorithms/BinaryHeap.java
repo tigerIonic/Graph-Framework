@@ -32,28 +32,33 @@ public class BinaryHeap {
     }
 
     public int remove() {
-        pos =0;
-    	int x = this.nodes[pos];
-        this.nodes[pos] = this.nodes[this.nodes.length-1];
+        int position =0;
+    	int x = this.nodes[position];
+        this.nodes[position] = this.nodes[this.pos];
 
-        int self = this.nodes[pos];
-    	int son1= this.nodes[2*pos+1];
-    	int son2= this.nodes[2*pos+1];
-    	int parent= this.nodes[(pos-1)/2];
+        int self = this.nodes[position];
+    	int son1= this.nodes[2*position+1];
+    	int son2= this.nodes[2*position+1];
     	int y;
 
         while (( self < son1) || ( self < son2)){
+
+            self = this.nodes[position];
+            son1= this.nodes[2*position+1];
+            son2= this.nodes[2*position+1];
 
             if (self < son1) {
                 y=self;
                 self=son1;
                 son1=y;
+                position=position+1;
             }
 
             if (self < son2) {
                 y=self;
                 self=son2;
                 son1=y;
+                position=position+2;
             }
         }
     	return x;
