@@ -5,10 +5,13 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
 import Abstraction.AbstractListGraph;
+import Abstraction.IDirectedGraph;
+import Abstraction.IGraph;
 import AdjacencyList.DirectedGraph;
 import AdjacencyList.DirectedValuedGraph;
 import AdjacencyList.UndirectedGraph;
 import AdjacencyList.UndirectedValuedGraph;
+import AdjacencyMatrix.AdjacencyMatrixDirectedValuedGraph;
 import Collection.Triple;
 import Nodes.AbstractNode;
 import Nodes.DirectedNode;
@@ -44,35 +47,40 @@ public class GraphToolsList  extends GraphTools {
 
 	// A completer
 
-	public static void parcoursEnProfondeur(AbstractListGraph<AbstractNode> g){
+	public static void parcoursEnProfondeur(DirectedGraph<DirectedNode> g){
 		boolean[] mark = new boolean[g.getNbNodes()];
-		for(int i = 0; i<g.getNbNodes(); i++){
+		for(int i=0 ; i<g.getNbNodes() ; i++){
 			mark[i] = false;
 		}
-		int index = 0;
-		Stack<AbstractNode> q= new Stack<AbstractNode>();
-		AbstractNode v = g.getNodes().get(0);
-		q.add(v);
-		//while (!q.isEmpty()){
-			//AbstractNode n = q.poll();
-
-		//}
+		Stack<DirectedNode> toVisit = new Stack<>();
+		toVisit.add(g.getNodes().get(0));
+		while (!toVisit.isEmpty()){
+			DirectedNode v = toVisit.pop();
+			for (int i = 0; i < g.getNbNodes(); i ++){
+				if (g.isArc(v, g.getNodes().get(i))  && !mark[i]){
+					mark[i] = true;
+					toVisit.push(g.getNodes().get(i));
+				}
+			}
+		}
 	}
 
-	public static void parcoursEnLargeur(AbstractListGraph<AbstractNode> g){
+	public static void parcoursEnLargeur(DirectedGraph<DirectedNode> g){
 		boolean[] mark = new boolean[g.getNbNodes()];
-		for(int i = 0; i<g.getNbNodes(); i++){
+		for(int i=0 ; i<g.getNbNodes() ; i++){
 			mark[i] = false;
 		}
-		int index = 0;
-		Queue<AbstractNode> q= new PriorityQueue<AbstractNode>();
-		AbstractNode v = g.getNodes().get(0);
-		q.add(v);
-		while (!q.isEmpty()){
-			AbstractNode n = q.poll();
-
+		Queue<DirectedNode> toVisit = new LinkedList<>();
+		toVisit.add(g.getNodes().get(0));
+		while (!toVisit.isEmpty()){
+			DirectedNode v = toVisit.poll();
+			for (int i = 0; i < g.getNbNodes(); i ++){
+				if (g.isArc(v, g.getNodes().get(i))  && !mark[i]){
+					mark[i] = true;
+					toVisit.add(g.getNodes().get(i));
+				}
+			}
 		}
-
 	}
 
 	void explorerSommet(AbstractNode s, Set<AbstractNode> a) {
@@ -96,6 +104,40 @@ public class GraphToolsList  extends GraphTools {
 	}
 
 
+	int[] bellman(UndirectedValuedGraph g){
+		// Initialisation
+		int n = g.getNbNodes();
+		//int[][] matrix = g.getNodes().;
+		int[] p = new int[n];
+		int[] v = new int[n];
+		Arrays.fill(v, Integer.MAX_VALUE);
+
+		v[0] = 0;
+		p[0] = 0;
+
+		for (int k = 0 ; k < n-1; k++){
+			for (int i = 0; i<n ; i++){
+
+			}
+		}
+
+
+		return v;
+	}
+
+	public static void print2D(int mat[][])
+	{
+		// Loop through all rows
+		for (int[] row : mat){
+			System.out.println("");
+			// Loop through all columns of current row
+			for (int x : row)
+				System.out.print(x + " ");
+		}
+
+	}
+
+
 	public static void main(String[] args) {
 		int[][] Matrix = GraphTools.generateGraphData(10, 20, false, false, true, 100001);
 		GraphTools.afficherMatrix(Matrix);
@@ -103,8 +145,7 @@ public class GraphToolsList  extends GraphTools {
 		System.out.println(al);
 
 		// A completer
-
-		//GraphToolsList.parcoursEnLargeur(al);
-
+        GraphToolsList.parcoursEnLargeur(al);
+		GraphToolsList.parcoursEnProfondeur(al);
 	}
 }
