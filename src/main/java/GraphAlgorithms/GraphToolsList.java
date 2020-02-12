@@ -47,7 +47,7 @@ public class GraphToolsList  extends GraphTools {
 
 	// A completer
 
-	void parcoursEnProfondeur(DirectedGraph<DirectedNode> g){
+	public static void parcoursEnProfondeur(IGraph g){
 		boolean[] mark = new boolean[g.getNbNodes()];
 		for(int i=0 ; i<g.getNbNodes() ; i++){
 			mark[i] = false;
@@ -65,7 +65,7 @@ public class GraphToolsList  extends GraphTools {
 		}
 	}
 
-	void parcoursEnLargeur(DirectedGraph<DirectedNode> g){
+	public static void parcoursEnLargeur(DirectedGraph<DirectedNode> g){
 		boolean[] mark = new boolean[g.getNbNodes()];
 		for(int i=0 ; i<g.getNbNodes() ; i++){
 			mark[i] = false;
@@ -141,9 +141,8 @@ public class GraphToolsList  extends GraphTools {
         UndirectedGraph<UndirectedNode> undirectedGraph = new UndirectedGraph<>(Matrix);
 
 		// A completer
-        GraphToolsList gl = new GraphToolsList();
-        gl.parcoursEnLargeur(al);
-        gl.parcoursEnProfondeur(al);
-        gl.explorerGraphe(undirectedGraph);
+
+		GraphToolsList.parcoursEnProfondeur(al);
+
 	}
 }
