@@ -57,8 +57,33 @@ public class BinaryHeapEdge<A> {
 	 * 
 	 */
     public Triple<A,A,Integer> remove() {
-    	// To complete
-    	return null;
+    	this.binh.get(0).setThird(Integer.MAX_VALUE);
+		int me = this.binh.indexOf(this.binh.get(0));
+		int right = 2 * me +2;
+		int left = 2*me+1;
+		boolean stop =false;
+    	while (!stop && (this.binh.get(me).getThird()>this.binh.get(right).getThird() || this.binh.get(me).getThird()>this.binh.get(left).getThird() )){
+    		if (this.binh.get(right).getThird()<this.binh.get(left).getThird()){
+    			swap(me,right);
+    			me = right;
+
+			}
+    		else{
+    			swap(me,left);
+				me = left;
+
+			}
+
+			if (!isLeaf(me)) {
+				right = 2 * me + 2;
+				left = 2 * me + 1;
+			}else {
+				stop =true;
+				this.binh.remove(me);
+			}
+		}
+
+    	return this.binh.get(0);
         
     }
     
@@ -80,8 +105,7 @@ public class BinaryHeapEdge<A> {
     }
 
     private boolean isLeaf(int src) {
-    	// A completer
-    	return false;
+		return ((2 * src) + 1) >= this.binh.size()-1;
     }
 
     
@@ -186,10 +210,19 @@ public class BinaryHeapEdge<A> {
             jarjarBin.insert(new DirectedNode(k), new DirectedNode(k+30), rand);            
             k--;
         }
-        // A completer
+
         
         System.out.println(jarjarBin.test());
         System.out.println(jarjarBin);
+        System.out.println(jarjarBin.remove());
+		System.out.println(jarjarBin);
+		System.out.println(jarjarBin.test());
+
+		/* L'algorithme permet d'avoir une liste de liaison triée par poids croissants. Pour réaliser
+		l'algorithme de PRIM il faut lister les liaisons jusqu'à avoir touché tous les noeuds par ordre croissant.
+		L'opération a  ajouté est donc une opération de tris afin d'être sur de prendre en premier les liaisons
+		avec le plus faible	poids
+		*/
     }
 
 }
