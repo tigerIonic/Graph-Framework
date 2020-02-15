@@ -99,7 +99,7 @@ public class BinaryHeap {
 	 * 
 	 */	
     private boolean isLeaf(int src) {
-    	// A completer
+
     	return ((2 * src) + 1) >= this.pos;
     }
 

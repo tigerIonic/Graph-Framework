@@ -30,8 +30,24 @@ public class BinaryHeapEdge<A> {
 	 * @param val the edge weight
 	 */
     public void insert(A from, A to, int val) {
-    	// To complete
-    }
+    	Triple<A,A,Integer> nEdge = new Triple(from,to,val);
+    	int valNEdge = nEdge.getThird();
+    	this.binh.add(nEdge);
+		int me = this.binh.indexOf(nEdge);
+    	int father = (me-1) / 2;
+		boolean stop = false;
+		while(!stop && (father >= 0)){
+
+			if (this.binh.get(father).getThird() > this.binh.get(me).getThird()){
+				swap(father,me);
+				me= father;
+				father = (me-1)/2;
+			} else {
+				stop = true;
+			}
+		}
+
+	}
 
     
     /**
@@ -173,6 +189,7 @@ public class BinaryHeapEdge<A> {
         // A completer
         
         System.out.println(jarjarBin.test());
+        System.out.println(jarjarBin);
     }
 
 }

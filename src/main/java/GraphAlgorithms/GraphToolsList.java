@@ -47,7 +47,7 @@ public class GraphToolsList  extends GraphTools {
 
 	// A completer
 
-	public static void parcoursEnProfondeur(IGraph g){
+	public static void parcoursEnProfondeur(DirectedGraph<DirectedNode> g){
 		boolean[] mark = new boolean[g.getNbNodes()];
 		for(int i=0 ; i<g.getNbNodes() ; i++){
 			mark[i] = false;
