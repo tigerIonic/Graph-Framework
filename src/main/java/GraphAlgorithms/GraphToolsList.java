@@ -105,23 +105,32 @@ public class GraphToolsList  extends GraphTools {
 	}
 
 
-	int[] bellman(UndirectedValuedGraph g){
+	public static int[] bellman(AbstractListGraph<DirectedNode> g){
 		// Initialisation
 		int n = g.getNbNodes();
-		//int[][] matrix = g.getNodes().;
-		int[] p = new int[n];
+		List<DirectedNode> listNodes = g.getNodes();
 		int[] v = new int[n];
+		DirectedNode[] p = new DirectedNode[n];
 		Arrays.fill(v, Integer.MAX_VALUE);
-
 		v[0] = 0;
-		p[0] = 0;
-
+		p[0] = listNodes.get(0);
 		for (int k = 0 ; k < n-1; k++){
-			for (int i = 0; i<n ; i++){
-
+			for (DirectedNode node : listNodes){
+				if (v[node.getLabel()] != Integer.MAX_VALUE){
+					for (Map.Entry<DirectedNode,Integer> entry : node.getSuccs().entrySet()){
+						if ( v[entry.getKey().getLabel()]  > ( v[node.getLabel()] + entry.getValue() )){
+							v[entry.getKey().getLabel()] =  v[node.getLabel()] + entry.getValue();
+							p[entry.getKey().getLabel()] = node;
+						}
+					}
+				}
 			}
 		}
-
+		System.out.print("[");
+		for (int c = 0 ; c < n ; c++){
+			System.out.print(v[c] + ",");
+		}
+		System.out.println("]");
 
 		return v;
 	}
@@ -143,6 +152,9 @@ public class GraphToolsList  extends GraphTools {
 		// A completer
 
 		GraphToolsList.parcoursEnProfondeur(al);
-
+		
+		int[][] matrixValued = GraphTools.generateValuedGraphData(5, false, false, true, false, 100001);
+		DirectedValuedGraph al = new DirectedValuedGraph(matrixValued);
+		GraphToolsList.bellman(al);
 	}
 }
