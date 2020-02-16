@@ -162,12 +162,15 @@ public class GraphToolsList  extends GraphTools {
 			b[index] = true;
 
 
-			for (Map.Entry<DirectedNode,Integer> entry : listNodes.get(index).getSuccs().entrySet()){
-				if (v[entry.getKey().getLabel()] > v[index] + entry.getValue()){
-					v[entry.getKey().getLabel()] =  v[index] + entry.getValue();
-					p[entry.getKey().getLabel()] = listNodes.get(index);
+			if (nodeValue != Integer.MAX_VALUE){
+				for (Map.Entry<DirectedNode,Integer> entry : listNodes.get(index).getSuccs().entrySet()){
+					if (v[entry.getKey().getLabel()] > v[index] + entry.getValue()){
+						v[entry.getKey().getLabel()] =  v[index] + entry.getValue();
+						p[entry.getKey().getLabel()] = listNodes.get(index);
+					}
 				}
 			}
+
 
 			isDone = true;
 			for (boolean j : b){
