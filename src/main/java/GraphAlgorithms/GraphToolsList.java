@@ -134,6 +134,55 @@ public class GraphToolsList  extends GraphTools {
 
 		return v;
 	}
+	
+	public static int[] dijkstra(AbstractListGraph<DirectedNode> g){
+		// Initialisation
+		int n = g.getNbNodes();
+		List<DirectedNode> listNodes = g.getNodes();
+		int[] v = new int[n];
+		boolean[] b = new boolean[n];
+		DirectedNode[] p = new DirectedNode[n];
+		Arrays.fill(v, Integer.MAX_VALUE);
+		Arrays.fill(b, false);
+		v[0] = 0;
+		p[0] = listNodes.get(0);
+
+		boolean isDone = false;
+		while (!isDone){
+			int nodeValue = Integer.MAX_VALUE;
+			int index = 0;
+
+			for (int i = 0 ; i<n; i++){
+				if (v[i] <= nodeValue && !b[i]){
+					index = i;
+					nodeValue = v[index];
+				}
+			}
+
+			b[index] = true;
+
+
+			for (Map.Entry<DirectedNode,Integer> entry : listNodes.get(index).getSuccs().entrySet()){
+				if (v[entry.getKey().getLabel()] > v[index] + entry.getValue()){
+					v[entry.getKey().getLabel()] =  v[index] + entry.getValue();
+					p[entry.getKey().getLabel()] = listNodes.get(index);
+				}
+			}
+
+			isDone = true;
+			for (boolean j : b){
+				isDone = j && isDone;
+			}
+		}
+
+		System.out.print("[");
+		for (int c = 0 ; c < n ; c++){
+			System.out.print(v[c] + ",");
+		}
+		System.out.println("]");
+
+		return v;
+	}
 
 
 	void calculComposantesFortementConnexe(UndirectedGraph<UndirectedNode> g) {
